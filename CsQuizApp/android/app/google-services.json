@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "616777944660",
+    "project_id": "csclubquizmakerapp",
+    "storage_bucket": "csclubquizmakerapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616777944660:android:93c8f023b390703a9727c1",
+        "android_client_info": {
+          "package_name": "com.example.csquizapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616777944660-ovcnnda3ght87c40to8rlabto5vp7iqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFRlXUxfBQ0FN48V5g19db8WEQaS75xvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616777944660-ovcnnda3ght87c40to8rlabto5vp7iqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
