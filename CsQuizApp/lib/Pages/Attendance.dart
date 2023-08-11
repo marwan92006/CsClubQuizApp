@@ -19,8 +19,8 @@ class _AttendanceState extends State<Attendance> {
 
   @override
   void initState() {
-    ref = FirebaseDatabase.instance.ref(
-        "Private/User's quizzes/${user?.uid}/${widget.quizId}/Attendance");
+    ref = FirebaseDatabase.instance
+        .ref("Private/User's quizzes/${user?.uid}/${widget.quizId}/Attendance");
     super.initState();
   }
 
@@ -33,71 +33,71 @@ class _AttendanceState extends State<Attendance> {
             ),
             leading: Image.asset("lib/images/official-logo.png"),
             backgroundColor: const Color(0xff252C4A)),
-        body: Stack(
-            children: [
-              SvgPicture.asset(
-                "lib/images/bg.svg",
-                fit: BoxFit.fill,
-              ),
-              SafeArea(child: Expanded(
-                  child: FirebaseAnimatedList(
-                      query: ref,
-                      itemBuilder: (context, snapshot, animation, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Card(
-                            color: Colors.white70,
-                            child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "Name: ${snapshot
-                                              .child("Name")
-                                              .value
-                                              .toString()}", style: TextStyle(
-                                            color: Colors.blue[900]
-                                        ),),
-                                        Text(
-                                            "   Score: ${snapshot
-                                                .child("Score")
-                                                .value
-                                                .toString()}", style: TextStyle(
-                                            color: Colors.green[800])),
-                                      ],
-                                    ),
-                                  ],
+        body: Stack(children: [
+          SvgPicture.asset(
+            "lib/images/bg.svg",
+            fit: BoxFit.fill,
+            height: 1080,
+            width: 1920,
+          ),
+          Center(
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 50),
+                  Expanded(
+                      child: FirebaseAnimatedList(
+                          query: ref,
+                          itemBuilder: (context, snapshot, animation, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Card(
+                                child: ListTile(
+                                  title: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                            "Name: ${snapshot.child("Name").value.toString()}",
+                                            style: TextStyle(color: Colors.blue[900]),
+                                          ),
+                                          Text(
+                                              "   Score: ${snapshot.child("Score").value.toString()}",
+                                              style: TextStyle(
+                                                  color: Colors.green[800])),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  subtitle: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          SelectableText(
+                                            "Uid: ${snapshot.child("Uid").value.toString()}",
+                                            style: TextStyle(
+                                                color: Colors.red[900], fontSize: 12),
+                                          ),
+                                          Text(
+                                              "Date: ${snapshot.child("Date").value.toString()}",
+                                              style: TextStyle(
+                                                  color: Colors.yellow[400],
+                                                  fontSize: 12)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-
-                                subtitle: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        SelectableText(
-                                          "Uid: ${snapshot
-                                              .child("Uid")
-                                              .value
-                                              .toString()}", style: TextStyle(
-                                            color: Colors.red[900]
-                                        ),),
-                                        Text(
-                                            "Date: ${snapshot
-                                                .child("Date")
-                                                .value
-                                                .toString()}", style: TextStyle(
-                                            color: Colors.yellow[400])),
-                                      ],
-                                    ),
-                                  ],
-                                ) ,
-                            ),
-                          ),
-                        );
-                      })),
-              )
-            ]));
+                              ),
+                            );
+                          })),
+                ],
+              ),
+            ),
+          )
+        ]));
   }
 }
