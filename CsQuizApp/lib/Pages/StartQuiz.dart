@@ -24,25 +24,37 @@ class _StartQuizState extends State<StartQuiz> {
 
   final ref = FirebaseDatabase.instance.ref();
 
-  Future<void> readData() async {
+  Future<void> readDataAndSetAttendedName() async {
     if (quizIdController.text.isEmpty) {
-      showSnackbarMessage(context, "Please fill the quiz Id");
-    } else {
-      final snapshot = await ref
+      showSnackbarMessage(context, "Please fill the quiz Id field");
+    }
+    else if (attendedNameController.text.isEmpty){
+      showSnackbarMessage(context, "Please fill the name field");
+    }
+    else {
+      final snapshotQ = await ref
           .child("Public/Public quizzes/${quizIdController.text.toString()}")
           .get();
-      if (snapshot.exists) {
+      final snapshotC = await ref
+          .child("Public/Public quizzes/${quizIdController.text.toString()}/Creator")
+          .get();
+      if (snapshotQ.exists &&
+          attendedNameController.text.toString().isNotEmpty) {
+        String creator = snapshotC.value.toString();
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => DisplayQuestion(
                   quizId: quizIdController.text.toString(),
+                  attendantName: attendedNameController.text.toString(), creator: creator,
                 )));
       } else {
-        showSnackbarMessage(context, "Quiz doesn't exist");
+        showSnackbarMessage(
+            context, "Quiz doesn't exist");
       }
     }
   }
 
   final quizIdController = TextEditingController();
+  final attendedNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +71,16 @@ class _StartQuizState extends State<StartQuiz> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Textfield(
+              controller: attendedNameController,
+              hintText: "Name",
+              obscureText: false,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Textfield(
               controller: quizIdController,
-              hintText: "Enter your quiz Id",
+              hintText: "Enter the quiz Id",
               obscureText: false,
             ),
             const SizedBox(
@@ -68,7 +88,7 @@ class _StartQuizState extends State<StartQuiz> {
             ),
             SubmitButton(
               text: "Proceed",
-              onpressed: readData,
+              onpressed: readDataAndSetAttendedName,
             ),
           ],
         ),

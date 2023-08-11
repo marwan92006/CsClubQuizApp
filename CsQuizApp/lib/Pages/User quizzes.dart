@@ -1,4 +1,6 @@
-import 'package:csquizapp/Pages/Edit%20or%20Start.dart';
+
+import 'package:csquizapp/Pages/Attendance%20or%20quizId%20.dart';
+import 'package:csquizapp/Pages/Attendance.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -66,7 +68,7 @@ class _UserQuizState extends State<UserQuiz> {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                               title: const Text(
-                                                "The Quiz is about to be deleted Permanently !",
+                                                "This Quiz is about to be deleted Permanently !",
                                                 style: TextStyle(
                                                     fontSize: 18,
                                                     fontWeight:
@@ -132,7 +134,7 @@ class _UserQuizState extends State<UserQuiz> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  EditOrStartQuiz(
+                                                  AttendanceOrQuizId(
                                                     quizId: snapshot
                                                         .child("QuizId")
                                                         .value

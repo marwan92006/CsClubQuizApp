@@ -41,6 +41,7 @@ class _CreateQuizState extends State<CreateQuiz> {
       await refPublic.set({
         "QuizTitle": quizTitleController.text.toString(),
         "QuizDescription": quizDescriptionController.text.toString(),
+        "Creator": user?.uid.toString(),
       });
       await refPrivate.set({
         "QuizId": quizId,
